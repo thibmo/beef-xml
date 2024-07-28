@@ -942,19 +942,16 @@ namespace Xml_Beef
 				if (PreserveWhitespace) {
 					node.Text = line;
 				} else {
-					bool found = false;
-
 					for (int i = 0; i < line.Length; i++) {
+						var isWhitespace = false;
 						for (char8 char in CXmlSpaces) {
 							if (line[i] == char) {
-								found = true;
+								isWhitespace = true;
 								break;
 							}
 						}
-
-						if (!found) {
-							node.Text = line;
-							break;
+						if(!isWhitespace) {
+							node.Text.Append(line[i]);
 						}
 					}
 				}
